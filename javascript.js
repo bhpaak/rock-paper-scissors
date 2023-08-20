@@ -15,29 +15,38 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === 'rock') {
         switch(computerSelection) {
             case 'paper':
-                return 'You lose! Paper beats Rock!';
+                console.log('You lose! Paper beats Rock!');
+                return 'lose';
             case 'scissors':
-                return 'You win! Rock beats Scissors!';
+                console.log('You win! Rock beats Scissors!');
+                return 'win';
             case 'rock':
-                return 'You tied. Rock against Rock!';
+                console.log('You tied. Rock against Rock!');
+                return 'tie';
         }
     } else if (playerSelection === 'paper') {
         switch(computerSelection) {
             case 'scissors':
-                return 'You lose! Scissors beats Paper!';
+                console.log('You lose! Scissors beats Paper!');
+                return 'lose';
             case 'rock':
-                return 'You win! Paper beats Rock!';
+                console.log('You win! Paper beats Rock!');
+                return 'win';
             case 'paper':
-                return 'You tied. Paper against Paper!';
+                console.log('You tied. Paper against Paper!');
+                return 'tie';
         }
     } else if (playerSelection === 'scissors') {
         switch(computerSelection) {
             case 'rock': 
-                return 'You lose! Rock beats Scissors!';
+                console.log('You lose! Rock beats Scissors!');
+                return 'lose';
             case 'paper':
-                return 'You win! Scissors beats Paper!';
+                console.log('You win! Scissors beats Paper!');
+                return 'win';
             case 'scissors':
-                return 'You tied. Scissors against scissors!';
+                console.log('You tied. Scissors against scissors!');
+                return 'tie';
         }
     }
 }

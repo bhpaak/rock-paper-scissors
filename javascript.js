@@ -87,3 +87,13 @@ function game() {
         console.log(`You tied the game. You won ${playerScore}, lost ${computerScore}, and tied ${tieScore}.`);
     }
 }
+
+let buttons = document.querySelectorAll(".buttons button");
+
+buttons.forEach( (button) => {
+    button.addEventListener('click', (e) => {
+        let playerSelection = e.target.value;
+        let computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+    })
+})

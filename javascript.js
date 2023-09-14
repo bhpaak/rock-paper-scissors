@@ -61,7 +61,6 @@ function game() {
 
     for (let round=1; round <= 5; round++) {
         playerSelection = prompt("Rock, Paper or Scissors?");
-        playerSelection = playerSelection.toLowerCase();
         
         computerSelection = getComputerChoice();
 

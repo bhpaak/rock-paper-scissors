@@ -26,7 +26,6 @@ let results = document.querySelector(".results");
 
 let playerScore = 0;
 let computerScore = 0;
-let tieScore = 0;
 
 function game(e) { 
     let playerSelection = e.target.value;

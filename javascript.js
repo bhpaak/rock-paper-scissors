@@ -3,48 +3,6 @@ function getComputerChoice() {
     return choice[Math.floor(Math.random() * choice.length)];
 }
 
-// function playRound(playerSelection, computerSelection) {
-//     playerSelection = playerSelection.toLowerCase();
-
-//     if (playerSelection === 'rock') {
-//         switch(computerSelection) {
-//             case 'paper':
-//                 console.log('You lose! Paper beats Rock!');
-//                 return 'lose';
-//             case 'scissors':
-//                 console.log('You win! Rock beats Scissors!');
-//                 return 'win';
-//             case 'rock':
-//                 console.log('You tied. Rock against Rock!');
-//                 return 'tie';
-//         }
-//     } else if (playerSelection === 'paper') {
-//         switch(computerSelection) {
-//             case 'scissors':
-//                 console.log('You lose! Scissors beats Paper!');
-//                 return 'lose';
-//             case 'rock':
-//                 console.log('You win! Paper beats Rock!');
-//                 return 'win';
-//             case 'paper':
-//                 console.log('You tied. Paper against Paper!');
-//                 return 'tie';
-//         }
-//     } else if (playerSelection === 'scissors') {
-//         switch(computerSelection) {
-//             case 'rock': 
-//                 console.log('You lose! Rock beats Scissors!');
-//                 return 'lose';
-//             case 'paper':
-//                 console.log('You win! Scissors beats Paper!');
-//                 return 'win';
-//             case 'scissors':
-//                 console.log('You tied. Scissors against scissors!');
-//                 return 'tie';
-//         }
-//     }
-// }
-
 function playRound(playerSelection, computerSelection) {
     if ((playerSelection === 'rock' && computerSelection === 'scissors') ||
         (playerSelection === 'paper' && computerSelection === 'rock') ||
@@ -63,6 +21,9 @@ function playRound(playerSelection, computerSelection) {
 }
 
 let buttons = document.querySelectorAll(".buttons button");
+let scoreboard = document.querySelector(".score");
+let results = document.querySelector(".results");
+
 let playerScore = 0;
 let computerScore = 0;
 let tieScore = 0;
@@ -74,27 +35,37 @@ function game(e) {
 
     switch(result) {
         case 'win': 
-            playerScore++;    
-            if (playerScore === 5) {
-                buttons.forEach( (button) => button.removeEventListener('click', game));
-                console.log(`player: ${playerScore} | computer: ${computerScore} `)
-                console.log('Game over');
-            }
+            playerScore++; 
+            scoreboard.textContent = `Man: ${playerScore} || Machine: ${computerScore}`   
+            results.textContent = `You win: ${playerSelection} beats ${computerSelection}.`;
+            checkWinner(playerScore, computerScore);
             break;
         case 'lose': 
             computerScore++;
-            if (computerScore === 5) {
-                buttons.forEach( (button) => button.removeEventListener('click', game));
-                console.log(`player: ${playerScore} | computer: ${computerScore} `)
-                console.log('Game over');
-            }
+            scoreboard.textContent = `Man: ${playerScore} || Machine: ${computerScore}`   
+            results.textContent = `You lose: ${computerSelection} beats ${playerSelection}.`;
+            checkWinner(playerScore, computerScore);
             break;
         case 'tie': 
-            tieScore++; 
-            console.log(tieScore);
+            results.textContent = `It's a tie: ${playerSelection} against ${computerSelection}.`;
             break;
     }
 }
+
+function checkWinner(playerScore, computerScore) {
+    if (playerScore === 5 || computerScore === 5) {
+        buttons.forEach( (button) => button.removeEventListener('click', game));
+        gameOver = document.createElement('div');
+        if (playerScore > computerScore) {
+            gameOver.textContent = 'Game over. You\'ve WON! Reload page to try again!';
+            results.after(gameOver);
+        } else {
+            gameOver.textContent = 'Game over. You\'ve LOST. Reload page to try again!';
+            results.after(gameOver);
+        }       
+    }
+}
+
 
 buttons.forEach( (button) => {
     button.addEventListener('click', game)
